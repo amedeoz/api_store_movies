@@ -126,13 +126,6 @@ class MoviesController extends AbstractController
      */
     public function search_genre($genre)
     {
-        //$movies = $this->getDoctrine()->getRepository(Movies::class)->findBy(['genre' => $genre]);
-
-        // //$movies = $this->getDoctrine()->getManager()->createQuery('SELECT * FROM App\Entity\Movies m WHERE m.genre LIKE :genre')
-        // //->setParameter('genre', '%"' . $genre . '"%')->getResult();
-        // $entityManager = $this->getEntityManager();
-        // $query = $entityManager->createQuery("SELECT * FROM movies m WHERE m.genre LIKE :genre");
-        // $query->setParameter('genre', '% $genre %');
         if(strlen($genre) > 3){
             $movies = $this->getDoctrine()->getRepository(Movies::class)->findByGenre($genre);
             return $this->json([
