@@ -146,7 +146,7 @@ class MoviesController extends AbstractController
     public function search_title($title)
     {
         $movies = $this->getDoctrine()->getRepository(Movies::class)->findBy(['title' => $title]);
-        if(strlen($genre) > 3){
+        if(strlen($title) > 3){
             $movies = $this->getDoctrine()->getRepository(Movies::class)->findByTitle($title);
             return $this->json([
                 'message' => 'List film by title',
