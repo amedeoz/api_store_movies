@@ -12,6 +12,7 @@ use App\Entity\Movies;
 */
 class MoviesController extends AbstractController
 {
+    
     /**
      * @Route("/", name="index", methods={"GET"})
      */
