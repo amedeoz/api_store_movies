@@ -8,6 +8,12 @@ License: MIT
 Changes to run this project quickly:
 --------
 
+* Create an .env file based .env_example file at the root of the project with value:
+
+DATABASE_URL=mysql://user:password@server:3306/store_movies_week
+
+* Run command:
+
     composer install
     php bin/console doctrine:database:create
     php bin/console doctrine:migrations:migrate
