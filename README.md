@@ -1,6 +1,8 @@
 api_store_movies
 ==============
 
+# Project for registering and searching for movies via api using Symfony Framework
+
 License: MIT
 
 Changes to run this project quickly:
@@ -14,9 +16,6 @@ Changes to run this project quickly:
 <br />
 <br />
 <br />
-
-
-# Project for registering and searching for movies via api using Symfony Framework
 
 * URL access Swagger:
 --------------------------
