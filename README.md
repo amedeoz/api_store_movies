@@ -6,6 +6,11 @@ License: MIT
 Changes to run this project quickly:
 --------
 
+    composer install
+    php bin/console doctrine:database:create
+    php bin/console doctrine:migrations:migrate
+    symfony serve
+
 <br />
 <br />
 <br />
@@ -24,6 +29,7 @@ Changes to run this project quickly:
     
    * List api - endpoints available 
     
+    php bin/console debug:route
     
 ![ShowAPI](https://github.com/laurohen/api_store_movies/blob/master/images/api.png):
   
