@@ -12,11 +12,11 @@ use App\Entity\Movies;
 class WeekController extends AbstractController
 {
     /**
-     * @Route("/{week_num}", name="show", methods={"GET"})
+     * @Route("/{weekNum}", name="show", methods={"GET"})
      */
-    public function show($week_num)
+    public function show($weekNum)
     {
-        $movies = $this->getDoctrine()->getRepository(Movies::class)->findBy(['week_number' => $week_num]);
+        $movies = $this->getDoctrine()->getRepository(Movies::class)->findBy(['week_number' => $weekNum]);
         return $this->json([
             'message' => 'List film week',
             'data' => $movies
