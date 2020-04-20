@@ -32,9 +32,9 @@ class Movies
     private $poster;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", name="relase_date")
      */
-    private $release_date;
+    private $releaseDate;
 
     /**
      * @ORM\Column(type="string", length=15)
@@ -47,14 +47,14 @@ class Movies
     private $description;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text" name="url_trailer")
      */
-    private $url_trailer;
+    private $urlTrailer;
 
     /**
-     * @ORM\Column(type="string", length=2)
+     * @ORM\Column(type="string", name="week_number",  length=2)
      */
-    private $week_number;
+    private $weekNumber;
 
     /**
      * @ORM\Column(type="datetime")
@@ -109,12 +109,12 @@ class Movies
 
     public function getReleaseDate(): ?\DateTimeInterface
     {
-        return $this->release_date;
+        return $this->releaseDate;
     }
 
-    public function setReleaseDate(\DateTimeInterface $release_date): self
+    public function setReleaseDate(\DateTimeInterface $releaseDate): self
     {
-        $this->release_date = $release_date;
+        $this->releaseDate = $releaseDate;
 
         return $this;
     }
@@ -145,24 +145,24 @@ class Movies
 
     public function getUrlTrailer(): ?string
     {
-        return $this->url_trailer;
+        return $this->urlTrailer;
     }
 
-    public function setUrlTrailer(string $url_trailer): self
+    public function setUrlTrailer(string $urlTrailer): self
     {
-        $this->url_trailer = $url_trailer;
+        $this->urlTrailer = $urlTrailer;
 
         return $this;
     }
 
     public function getWeekNumber(): ?string
     {
-        return $this->week_number;
+        return $this->weekNumber;
     }
 
-    public function setWeekNumber(string $week_number): self
+    public function setWeekNumber(string $weekNumber): self
     {
-        $this->week_number = $week_number;
+        $this->weekNumber = $weekNumber;
 
         return $this;
     }
