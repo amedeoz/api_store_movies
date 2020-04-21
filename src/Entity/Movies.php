@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -65,6 +67,24 @@ class Movies
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\genres", mappedBy="movies", cascade={"persist", "remove"})
+     */
+    private $genres_id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\weeks", mappedBy="movies")
+     */
+    private $week_number_id;
+
+    public function __construct()
+    {
+        $this->genres_id = new ArrayCollection();
+        $this->week_number_id = new ArrayCollection();
+    }
+
+    
 
     public function getId(): ?int
     {
@@ -190,4 +210,67 @@ class Movies
 
         return $this;
     }
+
+    /**
+     * @return Collection|genres[]
+     */
+    public function getGenresId(): Collection
+    {
+        return $this->genres_id;
+    }
+
+    public function addGenresId(genres $genresId): self
+    {
+        if (!$this->genres_id->contains($genresId)) {
+            $this->genres_id[] = $genresId;
+            $genresId->setMovies($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGenresId(genres $genresId): self
+    {
+        if ($this->genres_id->contains($genresId)) {
+            $this->genres_id->removeElement($genresId);
+            // set the owning side to null (unless already changed)
+            if ($genresId->getMovies() === $this) {
+                $genresId->setMovies(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|weeks[]
+     */
+    public function getWeekNumberId(): Collection
+    {
+        return $this->week_number_id;
+    }
+
+    public function addWeekNumberId(weeks $weekNumberId): self
+    {
+        if (!$this->week_number_id->contains($weekNumberId)) {
+            $this->week_number_id[] = $weekNumberId;
+            $weekNumberId->setMovies($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWeekNumberId(weeks $weekNumberId): self
+    {
+        if ($this->week_number_id->contains($weekNumberId)) {
+            $this->week_number_id->removeElement($weekNumberId);
+            // set the owning side to null (unless already changed)
+            if ($weekNumberId->getMovies() === $this) {
+                $weekNumberId->setMovies(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
