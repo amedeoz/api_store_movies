@@ -19,52 +19,52 @@ class Movies
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $genre;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $poster;
 
     /**
-     * @ORM\Column(type="date", name="relase_date")
+     * @ORM\Column(type="date", name="relase_date", nullable=true)
      */
     private $releaseDate;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=15, nullable=true)
      */
     private $duration;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="text", name="url_trailer")
+     * @ORM\Column(type="text", name="url_trailer", nullable=true)
      */
     private $urlTrailer;
 
     /**
-     * @ORM\Column(type="string", name="week_number",  length=2)
+     * @ORM\Column(type="string", name="week_number",  length=2, nullable=true)
      */
     private $weekNumber;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
