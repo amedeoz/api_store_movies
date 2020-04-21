@@ -47,7 +47,7 @@ class Movies
     private $description;
 
     /**
-     * @ORM\Column(type="text" name="url_trailer")
+     * @ORM\Column(type="text", name="url_trailer")
      */
     private $urlTrailer;
 
