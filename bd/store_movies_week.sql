@@ -1,5 +1,5 @@
 ﻿# Host:  (Version 5.5.5-10.2.11-MariaDB-log)
-# Date: 2020-04-20 12:52:44
+# Date: 2020-04-21 17:25:44
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -18,7 +18,7 @@ CREATE TABLE `migration_versions` (
 # Data for table "migration_versions"
 #
 
-INSERT INTO `migration_versions` VALUES ('20200417152917','2020-04-17 15:32:31');
+INSERT INTO `migration_versions` VALUES ('20200421195424','2020-04-21 19:54:44');
 
 #
 # Structure for table "movies"
@@ -27,10 +27,10 @@ INSERT INTO `migration_versions` VALUES ('20200417152917','2020-04-17 15:32:31')
 DROP TABLE IF EXISTS `movies`;
 CREATE TABLE `movies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `genre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `genre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `poster` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `release_date` date NOT NULL,
+  `relase_date` date NOT NULL,
   `duration` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `url_trailer` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -38,10 +38,47 @@ CREATE TABLE `movies` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 #
 # Data for table "movies"
 #
 
-INSERT INTO `movies` VALUES (1,'action','007 sem tempo','ewreregter','2020-10-12','120 minutes','dfjkwejrfw frkjwehkjwhe  jehwrkjehw ','https://pathe-cdp.triple-it.nl/web/No_Time_To_Die_TRL_web720p_20191204033051.mp4','10','2020-04-17 13:49:02','2020-04-17 13:49:02'),(3,'action aventure','wewe testando 007 sem tempo 2','ewreregter','2020-10-20','120 minutes','dfjkwejrfw frkjwehkjwhe  jehwrkjehw ','https://pathe-cdp.triple-it.nl/web/No_Time_To_Die_TRL_web720p_20191204033051.mp4','10','2020-04-17 14:41:24','2020-04-17 14:41:24'),(4,'action aventure','wewe testando 007 sem tempo 2','ewreregter','2020-10-20','120 minutes','dfjkwejrfw frkjwehkjwhe  jehwrkjehw ','https://pathe-cdp.triple-it.nl/web/No_Time_To_Die_TRL_web720p_20191204033051.mp4','12','2020-04-17 14:41:37','2020-04-17 14:41:37'),(5,'action aventure','wewe testando 007 sem tempo 2','ewreregter','2020-10-20','120 minutes','dfjkwejrfw frkjwehkjwhe  jehwrkjehw ','https://pathe-cdp.triple-it.nl/web/No_Time_To_Die_TRL_web720p_20191204033051.mp4','15','2020-04-17 14:41:50','2020-04-17 14:41:50');
+
+#
+# Structure for table "genres"
+#
+
+DROP TABLE IF EXISTS `genres`;
+CREATE TABLE `genres` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `movies_id` int(11) DEFAULT NULL,
+  `type` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_A8EBE51653F590A4` (`movies_id`),
+  CONSTRAINT `FK_A8EBE51653F590A4` FOREIGN KEY (`movies_id`) REFERENCES `movies` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+#
+# Data for table "genres"
+#
+
+
+#
+# Structure for table "weeks"
+#
+
+DROP TABLE IF EXISTS `weeks`;
+CREATE TABLE `weeks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `movies_id` int(11) NOT NULL,
+  `number_week` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_803157D253F590A4` (`movies_id`),
+  CONSTRAINT `FK_803157D253F590A4` FOREIGN KEY (`movies_id`) REFERENCES `movies` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+#
+# Data for table "weeks"
+#
+
