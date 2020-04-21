@@ -123,6 +123,25 @@ class MoviesController extends AbstractController
     }
 
     /**
+     * @Route("/search/{value}", name="search", methods={"GET"})
+     */
+    public function search($value)
+    {
+        if(strlen($value) > 3){
+            $movies = $this->getDoctrine()->getRepository(Movies::class)->findByValue($value);
+            return $this->json([
+                'message' => 'List film by genre/title',
+                'data' => $movies
+            ]);
+        }else{
+            return $this->json([
+                'message' => 'Min 3 length',
+                'data' => strlen($value)
+            ]);
+        }
+    }
+
+    /**
      * @Route("/search_genre/{genre}", name="search_genre", methods={"GET"})
      */
     public function search_genre($genre)
