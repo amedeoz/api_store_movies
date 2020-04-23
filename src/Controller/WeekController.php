@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use Swagger\Annotations as SWG;
 use App\Entity\Movies;
 
 /**
@@ -13,6 +16,20 @@ class WeekController extends AbstractController
 {
     /**
      * @Route("/{weekNum}", name="show", methods={"GET"})
+     * @SWG\Get(
+	 * 		path="/weeks/{weekNum}",
+	 * 		tags={"weeks"},
+	 * 		operationId="weeks",
+	 * 		summary="List movies by number week.",
+	 * 		@SWG\Response(
+	 * 			response=200,
+	 * 			description="success",
+	 * 		),
+	 * 		@SWG\Response(
+	 * 			response=400,
+	 * 			description="Bad request",
+	 * 		),
+	 * 	)
      */
     public function show($weekNum)
     {
