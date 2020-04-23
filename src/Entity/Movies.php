@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MoviesRepository")
@@ -20,61 +21,71 @@ class Movies
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("movies")
      */
     private $genre;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("movies")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("movies")
      */
     private $poster;
 
     /**
-     * @ORM\Column(type="date", name="relase_date", nullable=true)
+     * @ORM\Column(type="date", name="release_date", nullable=true)
+     * @Groups("movies")
      */
     private $releaseDate;
 
     /**
      * @ORM\Column(type="string", length=15, nullable=true)
+     * @Groups("movies")
      */
     private $duration;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("movies")
      */
     private $description;
 
     /**
      * @ORM\Column(type="text", name="url_trailer", nullable=true)
+     * @Groups("movies")
      */
     private $urlTrailer;
 
     /**
      * @ORM\Column(type="string", name="week_number",  length=2, nullable=true)
+     * @Groups("movies")
      */
     private $weekNumber;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("movies")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("movies")
      */
     private $updatedAt;
-
+//, cascade={"persist", "remove"}
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\genres", mappedBy="movies", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Genres", mappedBy="movies")
      */
     private $genres_id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\weeks", mappedBy="movies")
+     * @ORM\OneToMany(targetEntity="App\Entity\Weeks", mappedBy="movies")
      */
     private $week_number_id;
 
