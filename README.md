@@ -26,6 +26,8 @@ Changes to run this project quickly:
 <br />
 <br />
 
+
+
 * URL access Swagger:
 --------------------------
 
@@ -40,6 +42,12 @@ Changes to run this project quickly:
     php bin/console debug:route
     
 ![ShowAPI](https://github.com/laurohen/api_store_movies/blob/master/images/api.png):
+
+
+* URL access api:
+--------------------------
+
+    URL => http://127.0.0.1:8000/
   
     
     
