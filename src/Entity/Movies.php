@@ -23,12 +23,6 @@ class Movies
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups("movies")
      */
-    private $genre;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups("movies")
-     */
     private $title;
 
     /**
@@ -62,12 +56,6 @@ class Movies
     private $urlTrailer;
 
     /**
-     * @ORM\Column(type="string", name="week_number",  length=2, nullable=true)
-     * @Groups("movies")
-     */
-    private $weekNumber;
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups("movies")
      */
@@ -78,21 +66,21 @@ class Movies
      * @Groups("movies")
      */
     private $updatedAt;
-//, cascade={"persist", "remove"}
+
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Genres", mappedBy="movies")
+     * @ORM\OneToMany(targetEntity="App\Entity\Genres", mappedBy="movies", cascade={"persist", "remove"})
      */
     private $genres_id;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Weeks", mappedBy="movies")
      */
-    private $week_number_id;
+    private $weeks_id;
 
     public function __construct()
     {
         $this->genres_id = new ArrayCollection();
-        $this->week_number_id = new ArrayCollection();
+        $this->weeks_id = new ArrayCollection();
     }
 
     
@@ -100,18 +88,6 @@ class Movies
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getGenre(): ?string
-    {
-        return $this->genre;
-    }
-
-    public function setGenre(string $genre): self
-    {
-        $this->genre = $genre;
-
-        return $this;
     }
 
     public function getTitle(): ?string
@@ -186,18 +162,6 @@ class Movies
         return $this;
     }
 
-    public function getWeekNumber(): ?string
-    {
-        return $this->weekNumber;
-    }
-
-    public function setWeekNumber(string $weekNumber): self
-    {
-        $this->weekNumber = $weekNumber;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -256,28 +220,28 @@ class Movies
     /**
      * @return Collection|weeks[]
      */
-    public function getWeekNumberId(): Collection
+    public function getWeeksId(): Collection
     {
-        return $this->week_number_id;
+        return $this->weeks_id;
     }
 
-    public function addWeekNumberId(weeks $weekNumberId): self
+    public function addWeeksId(weeks $weeksId): self
     {
-        if (!$this->week_number_id->contains($weekNumberId)) {
-            $this->week_number_id[] = $weekNumberId;
-            $weekNumberId->setMovies($this);
+        if (!$this->weeks_id->contains($weeksId)) {
+            $this->weeks_id[] = $weeksId;
+            $weeksId->setMovies($this);
         }
 
         return $this;
     }
 
-    public function removeWeekNumberId(weeks $weekNumberId): self
+    public function removeWeeksId(weeks $weeksId): self
     {
-        if ($this->week_number_id->contains($weekNumberId)) {
-            $this->week_number_id->removeElement($weekNumberId);
+        if ($this->weeks_id->contains($weeksId)) {
+            $this->weeks_id->removeElement($weeksId);
             // set the owning side to null (unless already changed)
-            if ($weekNumberId->getMovies() === $this) {
-                $weekNumberId->setMovies(null);
+            if ($weeksId->getMovies() === $this) {
+                $weeksId->setMovies(null);
             }
         }
 
