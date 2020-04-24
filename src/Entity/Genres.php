@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GenresRepository")
@@ -18,11 +21,12 @@ class Genres
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
+     * @Groups("movies")
      */
     private $type;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Movies", inversedBy="genres_id", cascade={"persist", "remove"})
+     * @Groups("movies")
      */
     private $movies;
 
