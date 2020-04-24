@@ -8,6 +8,7 @@ Use Symfony\Component\HttpFoundation\Request;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Swagger\Annotations as SWG;
+use App\Entity\Genres;
 use App\Entity\Movies;
 
 /**
@@ -138,14 +139,12 @@ class MoviesController extends AbstractController
         $data = $request->request->all();
         
         $movie = new Movies();
-        $movie->setGenre($data['genre']);
         $movie->setTitle($data['title']);
         $movie->setPoster($data['poster']);
         $movie->setReleaseDate(\DateTime::createFromFormat('Y-m-d', $data['release_date']));
         $movie->setDuration($data['duration']);
         $movie->setDescription($data['description']);
         $movie->setUrlTrailer($data['url_trailer']);
-        $movie->setWeekNumber($data['week_number']);
         $movie->setCreatedAt(new \DateTime('now', new \DateTimezone('America/Bahia')));
         $movie->setUpdatedAt(new \DateTime('now', new \DateTimezone('America/Bahia')));
         
@@ -308,9 +307,6 @@ class MoviesController extends AbstractController
         $data = $request->request->all();
         $movie = $this->getDoctrine()->getRepository(Movies::class)->find($moviesId);
 
-        if($request->request->has('genre'))
-            $movie->setGenre($data['genre']);
-
         if($request->request->has('title'))
             $movie->setTitle($data['title']);
 
@@ -329,10 +325,6 @@ class MoviesController extends AbstractController
         if($request->request->has('url_trailer'))
             $movie->setUrlTrailer($data['url_trailer']);
 
-        if($request->request->has('week_number'))
-            $movie->setWeekNumber($data['week_number']);
-
-    
         $movie->setUpdatedAt(new \DateTime('now', new \DateTimezone('America/Bahia')));
         
         $doctrine = $this->getDoctrine()->getManager();
@@ -374,9 +366,9 @@ class MoviesController extends AbstractController
     }
 
     /**
-     * @Route("/search/{value}", name="search", methods={"GET"})
+     * @Route("/search/{valueFull}", name="search", methods={"GET"})
      * @SWG\Get(
-	 * 		path="/movies/search/{value}",
+	 * 		path="/movies/search/{valueFull}",
 	 * 		tags={"movies"},
 	 * 		operationId="search",
 	 * 		summary="Search movies for title or genre.",
@@ -390,20 +382,17 @@ class MoviesController extends AbstractController
 	 * 		),
 	 * 	)
      */
-    public function search($value)
+    public function search($valueFull)
     {
-        if(strlen($value) > 3){
-            $movies = $this->getDoctrine()->getRepository(Movies::class)->findByValue($value);
-            return $this->json([
-                'message' => 'List film by genre/title',
-                'data' => $movies, 200, [], [
-                    'groups' => ['movies']
-                ]
+        if(strlen($valueFull) > 3){
+            $movies = $this->getDoctrine()->getRepository(Movies::class)->findByValueFull($valueFull);
+            return $this->json($movies, 200, [], [
+                'groups' => ['movies']
             ]);
         }else{
             return $this->json([
                 'message' => 'Min 3 length',
-                'data' => strlen($value)
+                'data' => strlen($valueFull)
             ]);
         }
     }
@@ -428,7 +417,7 @@ class MoviesController extends AbstractController
     public function search_genre($genre)
     {
         if(strlen($genre) > 3){
-            $movies = $this->getDoctrine()->getRepository(Movies::class)->findByGenre($genre);
+            $movies = $this->getDoctrine()->getRepository(Genres::class)->findByGenre($genre);
             return $this->json($movies, 200, [], [
                 'groups' => ['movies']
             ]);
