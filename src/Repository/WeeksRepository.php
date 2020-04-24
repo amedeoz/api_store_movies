@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Weeks;
+use App\Entity\Movies;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * @method Weeks|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +22,17 @@ class WeeksRepository extends ServiceEntityRepository
         parent::__construct($registry, Weeks::class);
     }
 
+    public function findByWeeks($weekNum)
+    {
+        return $this->createQueryBuilder('w')
+            ->andWhere('w.number = :param')
+            ->setParameter('param', $weekNum)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Weeks[] Returns an array of Weeks objects
     //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('w.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Weeks
-    {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+    
 }
