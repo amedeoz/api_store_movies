@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Movies;
+use App\Entity\Genres;
+use App\Entity\Weeks;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,13 +21,15 @@ class MoviesRepository extends ServiceEntityRepository
         parent::__construct($registry, Movies::class);
     }
 
-    public function findByGenre($genre)
+    public function findByValueFull($valueFull)
     {
-        return $this->createQueryBuilder('m')
-        ->andWhere('m.genre like :param')
-        ->setParameter('param', '%'.$genre.'%')
-        ->getQuery()
-        ->getResult();
+        $results = [];
+        
+        // $results.array_push($genre);
+        
+        //$results.array_push($title);
+
+        // return array_unique($results);
     }
 
     public function findByTitle($title)
@@ -37,32 +41,9 @@ class MoviesRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+
     // /**
     //  * @return Movies[] Returns an array of Movies objects
     //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Movies
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+    
 }
