@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\WeeksRepository")
@@ -17,17 +20,14 @@ class Weeks
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="number")
+     * @Groups("movies")
      */
-    private $movies_id;
+    private $number;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $number_week;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Movies", inversedBy="week_number_id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Movies", inversedBy="weeks_id", cascade={"persist", "remove"})
+     * @Groups("movies")
      */
     private $movies;
 
@@ -36,26 +36,14 @@ class Weeks
         return $this->id;
     }
 
-    public function getMoviesId(): ?int
+    public function getNumber(): ?string
     {
-        return $this->movies_id;
+        return $this->number;
     }
 
-    public function setMoviesId(int $movies_id): self
+    public function setNumber(?string $number): self
     {
-        $this->movies_id = $movies_id;
-
-        return $this;
-    }
-
-    public function getNumberWeek(): ?int
-    {
-        return $this->number_week;
-    }
-
-    public function setNumberWeek(int $number_week): self
-    {
-        $this->number_week = $number_week;
+        $this->number = $number;
 
         return $this;
     }
