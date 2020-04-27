@@ -1,5 +1,5 @@
 ﻿# Host: database-dev.cuu6et9mqpeu.us-east-1.rds.amazonaws.com  (Version 5.5.5-10.2.11-MariaDB-log)
-# Date: 2020-04-24 14:23:45
+# Date: 2020-04-26 23:40:07
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -18,7 +18,7 @@ CREATE TABLE `migration_versions` (
 # Data for table "migration_versions"
 #
 
-INSERT INTO `migration_versions` VALUES ('20200424172117','2020-04-24 17:22:40');
+INSERT INTO `migration_versions` VALUES ('20200424172117','2020-04-27 02:31:32');
 
 #
 # Structure for table "movies"
@@ -54,7 +54,7 @@ CREATE TABLE `genres` (
   `type` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_A8EBE51653F590A4` (`movies_id`),
-  CONSTRAINT `FK_A8EBE51653F590A4` FOREIGN KEY (`movies_id`) REFERENCES `movies` (`id`)
+  CONSTRAINT `FK_A8EBE51653F590A4` FOREIGN KEY (`movies_id`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 #
@@ -73,7 +73,7 @@ CREATE TABLE `weeks` (
   `number` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_803157D253F590A4` (`movies_id`),
-  CONSTRAINT `FK_803157D253F590A4` FOREIGN KEY (`movies_id`) REFERENCES `movies` (`id`)
+  CONSTRAINT `FK_803157D253F590A4` FOREIGN KEY (`movies_id`) REFERENCES `movies` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 #
