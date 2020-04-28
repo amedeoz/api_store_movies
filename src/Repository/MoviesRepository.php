@@ -21,17 +21,6 @@ class MoviesRepository extends ServiceEntityRepository
         parent::__construct($registry, Movies::class);
     }
 
-    public function findByValueFull($valueFull)
-    {
-        $results = [];
-        
-        // $results.array_push($genre);
-        
-        //$results.array_push($title);
-
-        // return array_unique($results);
-    }
-
     public function findByTitle($title)
     {
         return $this->createQueryBuilder('m')
