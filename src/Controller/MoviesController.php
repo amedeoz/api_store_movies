@@ -385,8 +385,9 @@ class MoviesController extends AbstractController
     public function search($valueFull)
     {
         if(strlen($valueFull) > 3){
-            $movies = $this->getDoctrine()->getRepository(Movies::class)->findByValueFull($valueFull);
-            return $this->json($movies, 200, [], [
+            $resultGenre = $this->getDoctrine()->getRepository(Genres::class)->findByGenre($valueFull);
+            $resultMovies = $this->getDoctrine()->getRepository(Movies::class)->findByTitle($valueFull);
+            return $this->json(['genres' => $resultGenre, 'movies' => $resultMovies], 200, [], [
                 'groups' => ['movies']
             ]);
         }else{
