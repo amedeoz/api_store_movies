@@ -382,8 +382,10 @@ class MoviesController extends AbstractController
 	 * 		),
 	 * 	)
      */
-    public function search($valueFull)
+    public function search(Request $request, $valueFull)
     {
+        //$valueF = $request->get( key: "param");
+        $param = $request->get("param");
         if(strlen($valueFull) > 3){
             $resultGenre = $this->getDoctrine()->getRepository(Genres::class)->findByGenre($valueFull);
             $resultMovies = $this->getDoctrine()->getRepository(Movies::class)->findByTitle($valueFull);
